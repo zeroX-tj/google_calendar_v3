@@ -1,7 +1,7 @@
 # (c) 2012 Wep'IT bvba
 module GoogleCalendarV3
   class Event
-    attr_accessor :kind, :etag, :status, :summary, :creator, :organizer, :start,:stop, :id
+    attr_accessor :kind, :etag, :status, :summary, :creator, :organizer, :start,:stop, :id,:description
     def initialize(params={})
       self.kind      = params['kind']
       self.etag      = params['etag']
@@ -12,6 +12,7 @@ module GoogleCalendarV3
       self.organizer = params['organizer']
       self.start     = params['start']
       self.stop      = params['stop']
+      self.description = params['description']
     end
   end
 end
