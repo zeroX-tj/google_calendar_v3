@@ -30,6 +30,7 @@ module GoogleCalendarV3
       options_string = encode_options(options)
       url = "/calendars/#{id}/events?#{options_string}"
       response = @connection.authenticated_get(url)
+      return [] unless response.parsed_response.has_key?('items')
       response.parsed_response['items'].map{|x| GoogleCalendarV3::Event.new(x)}
     end
     
