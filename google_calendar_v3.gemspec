@@ -8,8 +8,10 @@ Gem::Specification.new do |s|
   s.authors     = ["Niels Vandekeybus"]
   s.email       = ["nvdk@arguslabs.be"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = "Small, quick wrapper for google_calendar api (v3)"
+  s.description = "Small, quick wrapper for google_calendar api (v3)"
+
+
 
   s.rubyforge_project = "google_calendar_v3"
 
