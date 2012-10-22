@@ -21,7 +21,7 @@ module GoogleCalendarV3
     def self.list(token)
       connection = GoogleCalendarV3::Connection.new(token)
       response = connection.authenticated_get("/users/me/calendarList")
-      response.parsed_response['items'].map{|x| new(x,connection)}
+      response.parsed_response['items'].map{|x| new(x,connection)} if response.parsed_response['items']
     end
   
     private   
