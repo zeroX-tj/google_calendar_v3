@@ -11,7 +11,7 @@ module GoogleCalendarV3
       self.creator   = params['creator']
       self.organizer = params['organizer']
       self.start     = params['start']
-      self.stop      = params['stop']
+      self.stop      = params['end']
       self.description = params['description']
     end
   end
