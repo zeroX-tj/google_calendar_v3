@@ -17,6 +17,17 @@ module GoogleCalendarV3
     def events(options={})
       @events = retrieve_events(options)   
     end
+
+    def add_event(event)
+      params = {}
+      params[:start] = {"dateTime" => event.starts_at}
+      params[:end] = {"dateTime" => event.stops_at}
+      params[:summary] = event.name if event.name
+      params[:description] = event.description if event.description
+      # params[:id] = event.id
+
+      response = @connection.authenticated_post("/calendars/#{self.id}/events", params)
+    end
       
     def self.list(token)
       connection = GoogleCalendarV3::Connection.new(token)
