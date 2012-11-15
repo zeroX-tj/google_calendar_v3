@@ -12,9 +12,9 @@ module GoogleCalendarV3
     
     def authenticated_get(url)
       @response = self.class.get(url,:headers => {"Authorization" => "Bearer #{self.token}"} )
-      case response.code 
+      case @response.code
       when 200 
-        return response
+        return @response
       when 401
         raise InvalidTokenException.new(error_message)
       when 404
@@ -23,7 +23,21 @@ module GoogleCalendarV3
         raise "unknown exception"
       end
     end
-    
+
+    def authenticated_post(url, params)
+      @response = self.class.post(url, {:body => params.to_json, :headers => {"Authorization" => "Bearer #{self.token}", "Content-Type" => "application/json"}} )
+      case @response.code
+        when 200
+          return @response
+        when 401
+          raise InvalidTokenException.new(error_message)
+        when 404
+          raise NotFoundException.new('not found')
+        else
+          raise "unknown exception"
+      end
+    end
+
     def error_message
       return unless @response
       if @response.parsed_response.has_key?('error')

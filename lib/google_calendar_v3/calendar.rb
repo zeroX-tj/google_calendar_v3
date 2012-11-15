@@ -21,10 +21,27 @@ module GoogleCalendarV3
     def self.list(token)
       connection = GoogleCalendarV3::Connection.new(token)
       response = connection.authenticated_get("/users/me/calendarList")
-      return [] if response.parsed_response['items']
+      return [] unless response.parsed_response['items']
       response.parsed_response['items'].map{|x| new(x,connection)}
     end
-  
+
+    def self.get_or_create(token, cal_name)
+      connection = GoogleCalendarV3::Connection.new(token)
+      cal_list = self.list(token)
+      cal_list.each do |cal|
+        if cal.summary == cal_name
+          return cal
+        end
+      end
+      cal = self.create({"summary" => cal_name}, connection)
+      return cal
+    end
+
+    def self.create(params, connection)
+      response = connection.authenticated_post("/calendars", params)
+      self.new(response.parsed_response, connection)
+    end
+
     private   
     def retrieve_events(options)
       raise "InvalidConnectionException" unless @connection.is_a?(GoogleCalendarV3::Connection)
@@ -49,6 +66,6 @@ module GoogleCalendarV3
       end
       options
     end
-    
+
   end
 end
