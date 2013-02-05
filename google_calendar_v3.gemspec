@@ -5,8 +5,8 @@ require "google_calendar_v3/version"
 Gem::Specification.new do |s|
   s.name        = "google_calendar_v3"
   s.version     = GoogleCalendarV3::VERSION
-  s.authors     = ["Niels Vandekeybus"]
-  s.email       = ["nvdk@arguslabs.be"]
+  s.authors     = ["Niels Vandekeybus", "Tim Janssens"]
+  s.email       = ["nvdk@arguslabs.be", "tj@arguslabs.be"]
   s.homepage    = ""
   s.summary     = "Small, quick wrapper for google_calendar api (v3)"
   s.description = "Small, quick wrapper for google_calendar api (v3)"
